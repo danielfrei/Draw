@@ -5,6 +5,7 @@
 #include <iostream>
 #include <list>
 #include <fstream>
+#include <string.h>
 
 Zeichnung:: Zeichnung()   //Konstruktor
 {
@@ -77,10 +78,10 @@ void Zeichnung::load(std::istream &InputStream)
 
 
         int Zahl[4] = {};           //Array mit 4 Eigenschaften der Objekte
-
+        Form =  InputStream.get();  //Erkennt E, L oder R
         while(i<4)
         {
-            Form =  InputStream.get();  //Erkennt E, L oder R
+
             if(i==0) Zeichen =  InputStream.get();
             Zeichen =  InputStream.get();
             while((Zeichen != 32) &&(Zeichen != -1) && (Zeichen != 10) ) //Solange kein leerschlag
@@ -94,7 +95,7 @@ void Zeichnung::load(std::istream &InputStream)
                 Zeichen =  InputStream.get();
 
             }
-            std::cout <<  Zahl[i] <<" "<<std::endl;
+            //std::cout <<  Zahl[i] <<" "<<std::endl;
             i++;
             if(Zeichen == 10)
             {
@@ -113,7 +114,9 @@ void Zeichnung::load(std::istream &InputStream)
                     FigurePtr1 = new Rectangle(Zahl[0],Zahl[1],Zahl[2],Zahl[3]);
                     addFigure(FigurePtr1);
                 }
+                Form =  InputStream.get();  //Erkennt E, L oder R
                 i = 0;
+                memset(Zahl,0, sizeof(Zahl));
             }
 
         }
