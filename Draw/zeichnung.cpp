@@ -1,6 +1,7 @@
 #include "zeichnung.hpp"
 #include "ellipse.hpp"
 #include "lineclass.hpp"
+#include "rectangle.hpp"
 #include <iostream>
 #include <list>
 #include <fstream>
@@ -57,5 +58,66 @@ void Zeichnung::save(std::ostream &OutputStream)
 }
 void Zeichnung::load(std::istream &InputStream)
 {
+    //Oeffnen einer Datei zum lesen:
+    //std::ifstream ReadDatei("MeineDatei.txt");
+    //Lesen aus einer Datei
+    //ReadDatei >> i;
+    // Lesen eines einzelnen Zeichens
+    //char c = ReadDatei.get();
+    // pruefen auf Dateiende (End Of File)
 
+    Figure *FigurePtr1 = NULL;
+
+    while (!InputStream.eof())
+    {
+        int Zeichen;
+        int Form;
+        int i = 0;
+
+
+
+        int Zahl[4] = {};           //Array mit 4 Eigenschaften der Objekte
+
+        while(i<4)
+        {
+            Form =  InputStream.get();  //Erkennt E, L oder R
+            if(i==0) Zeichen =  InputStream.get();
+            Zeichen =  InputStream.get();
+            while((Zeichen != 32) &&(Zeichen != -1) && (Zeichen != 10) ) //Solange kein leerschlag
+            {
+                Zahl[i] = (Zahl[i]*10);
+                if(Zeichen != 32)
+                {
+                    Zahl[i] = Zahl[i] + (Zeichen-0x30);
+                }
+
+                Zeichen =  InputStream.get();
+
+            }
+            std::cout <<  Zahl[i] <<" "<<std::endl;
+            i++;
+            if(Zeichen == 10)
+            {
+                if(Form == 'E')
+                {
+                    FigurePtr1 = new Ellipse(Zahl[0],Zahl[1],Zahl[2],Zahl[3]);
+                    addFigure(FigurePtr1);
+                }
+                else if(Form == 'L')
+                {
+                    FigurePtr1 = new LineClass(Zahl[0],Zahl[1],Zahl[2],Zahl[3]);
+                    addFigure(FigurePtr1);
+                }
+                else if(Form == 'R')
+                {
+                    FigurePtr1 = new Rectangle(Zahl[0],Zahl[1],Zahl[2],Zahl[3]);
+                    addFigure(FigurePtr1);
+                }
+                i = 0;
+            }
+
+        }
+        //std::cout <<  Zeichen <<" ";
+
+    }
 }

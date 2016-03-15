@@ -107,7 +107,7 @@ LineClass::save(std::ostream &OutputStream)
     if (OutputStream)
     {
         //Schreiben inOutputStreamine Datei
-        OutputStream << "L"<<X1<<" "<<Y1<<" "<<X2<<" "<<Y2<< std::endl;
+        OutputStream << "L "<<X1<<" "<<Y1<<" "<<X2<<" "<<Y2<< std::endl;
     } else
     {
         std::cout << "Error beim oeffnen der Datei" << std::endl;

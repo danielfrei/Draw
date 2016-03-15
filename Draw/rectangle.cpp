@@ -31,7 +31,7 @@ Rectangle::save(std::ostream &OutputStream)
     if (OutputStream)
     {
         //Schreiben inOutputStreamine Datei
-        OutputStream << "R"<<X1<<" "<<Y1<<" "<<X2<<" "<<Y2<< std::endl;
+        OutputStream << "R "<<X1<<" "<<Y1<<" "<<X2<<" "<<Y2<< std::endl;
     } else
     {
         std::cout << "Error beim oeffnen der Datei" << std::endl;

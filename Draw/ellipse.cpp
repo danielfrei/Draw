@@ -43,7 +43,7 @@ Ellipse::save(std::ostream &OutputStream)
     if (OutputStream)
     {
         //Schreiben inOutputStreamine Datei
-        OutputStream << "E"<<X1<<" "<<Y1<<" "<<width<<" "<<length<< std::endl;
+        OutputStream << "E "<<X1<<" "<<Y1<<" "<<width<<" "<<length<< std::endl;
     } else
     {
         std::cout << "Error beim oeffnen der Datei" << std::endl;
